@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 struct DialogueButtonData
 {
-    GameObject button;
-    Button unityButton;
-    TMPro.TextMeshProUGUI buttonText;
+    public GameObject button;
+    public Button unityButton;
+    public TMPro.TextMeshProUGUI buttonText;
 };
 
 public class DialogueUI : MonoBehaviour
@@ -25,7 +25,7 @@ public class DialogueUI : MonoBehaviour
     {
         if (buttonPrefab)
         {
-            for (i = 0; i < numButtons; i++)
+            for (int i = 0; i < numButtons; i++)
             {
                 GameObject button = GameObject.Instantiate(buttonPrefab, gameObject.transform);
                 button.SetActive(false);
@@ -41,7 +41,7 @@ public class DialogueUI : MonoBehaviour
 
         if (lineUI != null)
         {
-            lineUI.SetActive(false);
+            lineUI.enabled = false;
         }
     }
 
@@ -64,7 +64,7 @@ public class DialogueUI : MonoBehaviour
         if (lineUI)
         {
             lineUI.SetText(data.line);
-            lineUI.SetActive(true)
+            lineUI.enabled = true;
         }
     }
 
@@ -72,7 +72,7 @@ public class DialogueUI : MonoBehaviour
     {
         if (lineUI)
         {
-            lineUI.SetActive(false);
+            lineUI.enabled = false;
         }
 
         foreach(DialogueButtonData button in activeButtons)

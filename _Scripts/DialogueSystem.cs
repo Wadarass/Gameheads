@@ -67,11 +67,11 @@ public class DialogueSystem : MonoBehaviour
                 if (m_currentLine.responses.Length > 0)
                 {
                     DialogueUIOption data = new DialogueUIOption();
-                    data.line = option;
+                    data.line = m_currentLine;
                     data.onclickEvent = new UnityAction[m_currentLine.responses.Length];
 
                     int index = 0;
-                    foreach (DialogueOption response in option.responses)
+                    foreach (DialogueOption response in m_currentLine.responses)
                     {
                         int currentIndex = index;
                         data.onclickEvent[index] += () => { this.NextLine(currentIndex); };
@@ -82,7 +82,7 @@ public class DialogueSystem : MonoBehaviour
                 }
                 else
                 {
-                    GH.EventSystem.RaiseEvent(new HideUI() );
+                    GH.EventSystem.instance.RaiseEvent(new HideUI() );
                 }
             }
         }
@@ -100,7 +100,7 @@ public class DialogueSystem : MonoBehaviour
                 m_dialogueWaitTime = m_currentLine.lineAudio.length;
             }
 
-            GH.EventSystem.RaiseEvent(new ShowSpokenLine { line = m_currentLine.line } );
+            GH.EventSystem.instance.RaiseEvent(new ShowSpokenLine { line = m_currentLine.line } );
             
             m_timerStarted = true;
             m_currentTime = 0.0f;
@@ -118,7 +118,7 @@ public class DialogueSystem : MonoBehaviour
 
     public void NextLine(int lineIndex)
     {
-        GH.EventSystem.RaiseEvent(new HideUI() );
+        GH.EventSystem.instance.RaiseEvent(new HideUI() );
         Debug.Log(string.Format("Next Line called: {0}", lineIndex));
         if (lineIndex < m_currentLine.responses.Length)
         {

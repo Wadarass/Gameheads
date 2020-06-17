@@ -6,4 +6,6 @@ using UnityEngine;
 public class DialogueDatabase : ScriptableObject
 {
     public DialogueOption[] dialogueLines;
+    int test;
+    int foo;
 }
